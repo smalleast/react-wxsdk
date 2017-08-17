@@ -1,0 +1,39 @@
+{
+  "name": "next-wxsdk",
+  "version": "0.0.0",
+  "description": "Better wechat jssdk based on next toolkit.",
+  "homepage": "https://github.com/afeiship/next-wxsdk",
+  "main": "dist/next-wxsdk.js",
+  "scripts": {
+    "build": "gulp"
+  },
+  "keywords": [
+    "next",
+    "wechat",
+    "jssdk",
+    "wx",
+    "sdk"
+  ],
+  "author": {
+    "name": "afei",
+    "email": "1290657123@qq.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "del": "^2.2.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-load-plugins": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-size": "^2.1.0",
+    "gulp-uglify": "^2.1.2",
+    "yargs": "^4.7.1"
+  },
+  "dependencies": {
+    "next-js-core2": "github:smalleast/next-js-core2",
+    "next-qqueue": "github:afeiship/next-qqueue",
+    "q": "^1.5.0",
+    "wechat-jssdk": "github:afeiship/wechat-jssdk"
+  }
+}
