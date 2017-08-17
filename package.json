@@ -28,11 +28,12 @@
     "gulp-sass": "^2.3.2",
     "gulp-size": "^2.1.0",
     "gulp-uglify": "^2.1.2",
+    "next-js-core2": "github:smalleast/next-js-core2",
+    "next-qqueue": "github:smalleast/next-qqueue",
     "yargs": "^4.7.1"
   },
   "dependencies": {
     "next-js-core2": "github:smalleast/next-js-core2",
-    "next-qqueue": "github:afeiship/next-qqueue",
     "q": "^1.5.0",
     "wechat-jssdk": "github:afeiship/wechat-jssdk"
   }
