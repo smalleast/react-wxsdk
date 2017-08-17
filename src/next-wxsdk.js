@@ -43,7 +43,7 @@
   ];
 
 
-  var Wxsdk = nx.declare('nx.Wxsdk', {
+  var Wxsdk = nx.declare('nxWxsdk', {
     statics: {
       VERSION: '1.2.0',
       wx: wx,
