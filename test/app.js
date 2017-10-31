@@ -4,7 +4,7 @@ import {ReduxAppBase} from 'next-react-redux';
 import {DetailStatus, BiddingList} from 'components/scripts/index';
 import ApiService from 'components/services/api';
 import store from 'store';
-import Wxsdk from 'next-wxsdk';
+import Wxsdk from 'react-wxsdk';
 
 export default class extends ReduxAppBase {
 
@@ -27,7 +27,7 @@ export default class extends ReduxAppBase {
         ]
       },
       session:{
-        afei:'session test..'
+        smalleast:'session test..'
       }
     }
   }
