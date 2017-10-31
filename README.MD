@@ -9,3 +9,8 @@
 npm run build
 
 ```
+
+# npm install
+```
+npm install smalleast/react-wxsdk --save
+```
