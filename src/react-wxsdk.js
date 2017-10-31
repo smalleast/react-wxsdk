@@ -2,7 +2,7 @@
 
   var global = window || this;
   var nx = global.nx || require('next-js-core2');
-  var wx = global.wx = global.wx || require('wx-jssdk');
+  var wx = global.wx = global.wx || require('wechat-jssdk');
   var Q = global.Q || require('q');
   var Qqueue = nx.Qqueue || require('next-qqueue');
 
