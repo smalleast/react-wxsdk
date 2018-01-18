@@ -22,6 +22,7 @@
     'chooseImage',
     'previewImage',
     'uploadImage',
+    'downloadImage',
     'getLocalImgData',
 
     //back to wechat:
@@ -58,6 +59,7 @@
           'chooseImage',
           'previewImage',
           'uploadImage',
+          'downloadImage',
           'getLocalImgData',
 
           'closeWindow',
@@ -135,37 +137,41 @@
           count: 9,
           sizeType: ['original', 'compressed'],
           sourceType: ['album', 'camera']
-        },inOptions);
-        return Wxsdk.__wrapToQPromise('chooseImage',options);
+        }, inOptions);
+        return Wxsdk.__wrapToQPromise('chooseImage', options);
       },
-
+      //wx.downloadImage:
+      syncDownloadImage: function (inOptions) {
+        return Wxsdk.__wrapToQPromise('downloadImage', inOptions);
+      },
 
       //wx.getLocalImgData:
       syncGetLocalImageData: function (inOptions) {
-        return Wxsdk.__wrapToQPromise('getLocalImgData',inOptions);
+        return Wxsdk.__wrapToQPromise('getLocalImgData', inOptions);
       },
-      syncGetLocalImageDatas: function(inLocalIds,inOptions){
-        var optionList = Wxsdk.__makeOptionList(inLocalIds,inOptions);
+      syncGetLocalImageDatas: function (inLocalIds, inOptions) {
+        var optionList = Wxsdk.__makeOptionList(inLocalIds, inOptions);
         return Qqueue.queue(optionList, Wxsdk.syncGetLocalImageData);
       },
 
       //wx.uploadImage
       syncUploadImage: function (inOptions) {
+
         var options = nx.mix({
           isShowProgressTips: 1
-        },inOptions);
-        return Wxsdk.__wrapToQPromise('uploadImage',options);
+        }, inOptions);
+        return Wxsdk.__wrapToQPromise('uploadImage', options);
       },
       syncUploadImages: function (inLocalIds, inOptions) {
-        var optionList = Wxsdk.__makeOptionList(inLocalIds,inOptions);
+        var optionList = Wxsdk.__makeOptionList(inLocalIds, inOptions);
         return Qqueue.queue(optionList, Wxsdk.syncUploadImage);
       },
 
       //chooseImage && getLocalImageData
-      syncChooseImageWithData:function(inChooseOptions,inImageOptions){
+      syncChooseImageWithData: function (inChooseOptions, inImageOptions) {
         var deferred = Q.defer();
-        Wxsdk.syncChooseImage(inChooseOptions).then(function(response){
-          Wxsdk.syncGetLocalImageDatas(response.localIds,inImageOptions).then(function(result){
+        Wxsdk.syncChooseImage(inChooseOptions).then(function (response) {
+          Wxsdk.syncGetLocalImageDatas(response.localIds, inImageOptions).then(function (result) {
             var localDatas = result.map(function (item) {
               return item.localData;
             });
@@ -174,10 +180,10 @@
               localIds: response.localIds,
               localDatas: result
             });
-          },function(err){
+          }, function (err) {
             deferred.reject(err);
           })
-        },function(error){
+        }, function (error) {
           deferred.reject(error);
         });
         return deferred.promise;
@@ -201,26 +207,26 @@
         return deferred.promise;
       },
 
-      syncChooseImageToUpload: function(inChooseOptions,inUploadOptions){
+      syncChooseImageToUpload: function (inChooseOptions, inUploadOptions) {
         var deferred = Q.defer();
-        Wxsdk.syncChooseImage(inChooseOptions).then(function(response){
+        Wxsdk.syncChooseImage(inChooseOptions).then(function (response) {
           var localIds = response.localIds;
           inUploadOptions.choosedCallback && inUploadOptions.choosedCallback(localIds);
-          Wxsdk.syncUploadImages(localIds, inUploadOptions).then(function(result){
-            var newImages = result.map(function(item, index){
+          Wxsdk.syncUploadImages(localIds, inUploadOptions).then(function (result) {
+            var newImages = result.map(function (item, index) {
               return nx.mix(item, {localId: localIds[index]});
             });
             deferred.resolve(newImages);
-          },function(err){
+          }, function (err) {
             deferred.reject(err);
           });
-        },function(error){
+        }, function (error) {
           deferred.reject(error);
         });
         return deferred.promise;
       },
 
-      __wrapToQPromise:function(inApi,inOptions){
+      __wrapToQPromise: function (inApi, inOptions) {
         var deferred = Q.defer();
         wx[inApi](
           nx.mix(inOptions, {
@@ -234,7 +240,7 @@
         );
         return deferred.promise;
       },
-      __makeOptionList:function(inLocalIds,inOptions){
+      __makeOptionList: function (inLocalIds, inOptions) {
         var optionList = [];
         inLocalIds.forEach(function (localId) {
           var option = nx.mix({}, inOptions, {localId: localId});
