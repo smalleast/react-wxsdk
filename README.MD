@@ -7,7 +7,6 @@
 
 ```
 npm run build
-
 ```
 
 # npm install
